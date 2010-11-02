@@ -42,10 +42,30 @@ function forward() {
  if ( n >= numphotos ) n = 0;
  showphoto(n);
 }
+function backward() {
+ n = n - 1;
+ if ( n < 0  ) n = numphotos-1;
+ showphoto(n);
+}
+function dokey(e){
+  /* Non-IE handling only */
+  var keychar = String.fromCharCode(e.which);
+  if (keychar ==  "f") forward();
+  if (keychar ==  "b") backward();
+  /* Arrow keys */
+  if (e.keycode == 37) backward();
+  if (e.keycode == 39) forward();
+
+  /* Ignore the keystroke to prevent search-on-page behaviour */
+  e.keycode = 0;
+  e.which = 0;
+  return (0 == 1);
+}
+
 </script>
 </head>
 
-<body onload="initPage();" onclick="forward();">
+<body onload="initPage();" onkeypress="dokey(event);" onclick="forward();">
 <h2 id="h">$dir</h2>
 
 <a id="a" href="dynamic">
