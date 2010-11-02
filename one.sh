@@ -30,6 +30,9 @@ function initPage() {
  i = document.getElementById("i");
  numphotos = photos.length;
  n = 0;
+ showphoto(n);
+}
+function showphoto(n){
  h.innerHTML = photos[n];
  a.href = photos[n];
  i.src = photos[n];
@@ -37,9 +40,7 @@ function initPage() {
 function forward() {
  n = n + 1;
  if ( n >= numphotos ) n = 0;
- h.innerHTML = photos[n];
- a.href = photos[n];
- i.src = photos[n];
+ showphoto(n);
 }
 </script>
 </head>
