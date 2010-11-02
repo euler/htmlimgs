@@ -50,16 +50,18 @@ function backward() {
 function dokey(e){
   /* Non-IE handling only */
   var keychar = String.fromCharCode(e.which);
+  // alert("which = " + e.which + " e.keyCode = " + e.keyCode);
   if (keychar ==  "f") forward();
   if (keychar ==  "b") backward();
   /* Arrow keys */
-  if (e.keycode == 37) backward();
-  if (e.keycode == 39) forward();
+  if (e.keyCode == 37) backward();
+  if (e.keyCode == 39) forward();
 
   /* Ignore the keystroke to prevent search-on-page behaviour */
-  e.keycode = 0;
-  e.which = 0;
-  return (0 == 1);
+  if (e.preventDefault) e.preventDefault( );
+  if (e.returnValue) e.returnValue = false;
+  return false;
+
 }
 
 </script>
