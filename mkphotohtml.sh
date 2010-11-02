@@ -21,7 +21,7 @@ END
   do
   cat <<END
 <a href="$f">
-<img src="$f" width="25%">
+<img src="$f" width="85%">
 </a><br />
 END
   done
