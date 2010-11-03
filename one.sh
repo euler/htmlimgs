@@ -50,17 +50,28 @@ function backward() {
 function dokey(e){
   /* Non-IE handling only */
   var keychar = String.fromCharCode(e.which);
-  // alert("which = " + e.which + " e.keyCode = " + e.keyCode);
+
+  /* Remember n, the photo number now being shown */
+  var inbound_n = n;
+
   if (keychar ==  "f") forward();
   if (keychar ==  "b") backward();
   /* Arrow keys */
   if (e.keyCode == 37) backward();
   if (e.keyCode == 39) forward();
 
-  /* Ignore the keystroke to prevent search-on-page behaviour */
-  if (e.preventDefault) e.preventDefault( );
-  if (e.returnValue) e.returnValue = false;
-  return false;
+  /*
+  ** If keystroke moved the photo, ignore it.
+  ** Otherwise, process the event as usuual.
+  */
+
+  if (n != inbound_n) {
+    /* Photo moved by this keystroke, no more processing */
+    if (e.preventDefault) e.preventDefault( );
+    if (e.returnValue) e.returnValue = false;
+    return false;
+  }
+  return true;
 
 }
 
