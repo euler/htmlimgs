@@ -67,7 +67,7 @@ function dokey(e){
 </script>
 </head>
 
-<body onload="initPage();" onkeypress="dokey(event);" onclick="forward();">
+<body onload="initPage();" onkeypress="dokey(event);">
 <h2 id="h">$dir</h2>
 
 <a id="a" href="dynamic">
