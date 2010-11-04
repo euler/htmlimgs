@@ -4,9 +4,8 @@
 # Self contained, minimal
 #
 
-  # $v Verbose defaults off unless set in env
+  # Use given directory or "."
   dir=${1:-"."}
-  [[ $v ]] && echo dir=$dir
   
 cat <<END
 <html>
