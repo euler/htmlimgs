@@ -82,7 +82,7 @@ function dokey(e){
 <h2 id="h">$dir</h2>
 
 <a id="a" href="dynamic">
-<img id="i" src="dynamic" width="90%"/>
+<img id="i" src="dynamic" style="max-height:90%;max-width:90%;" />
 </a> <br />
 
 </body>
