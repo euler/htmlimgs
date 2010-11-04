@@ -28,7 +28,7 @@ cat <<END
   <script>
   photos = [
 END
-  for f in $dir/*.jpg
+  for f in `find $dir -maxdepth 1 | egrep -i 'jpg$|jpeg$|png$|tiff$|tif$'`
   do
   cat <<END
   "$f",
