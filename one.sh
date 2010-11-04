@@ -12,6 +12,16 @@ cat <<END
 <html>
 <head>
   <title>Directory $dir</title>
+  <style>
+    .max90 {
+       max-height:90%;
+       max-width:90%;
+    }
+    .full {
+       max-height:none;
+       max-width:none;
+    }
+  </style>
   <script>
   photos = [
 END
@@ -26,27 +36,34 @@ cat <<END
 
 function initPage() {
  h = document.getElementById("h");
- a = document.getElementById("a");
  i = document.getElementById("i");
  numphotos = photos.length;
  n = 0;
  showphoto(n);
 }
+
 function showphoto(n){
  h.innerHTML = photos[n];
- a.href = photos[n];
  i.src = photos[n];
 }
+
+function swapimgclass(){
+  i.className = (i.className == "max90") ? "full" : "max90";
+  return false;
+}
+
 function forward() {
  n = n + 1;
  if ( n >= numphotos ) n = 0;
  showphoto(n);
 }
+
 function backward() {
  n = n - 1;
  if ( n < 0  ) n = numphotos-1;
  showphoto(n);
 }
+
 function dokey(e){
   /* Non-IE handling only */
   var keychar = String.fromCharCode(e.which);
@@ -81,9 +98,12 @@ function dokey(e){
 <body onload="initPage();" onkeypress="dokey(event);">
 <h2 id="h">$dir</h2>
 
-<a id="a" href="dynamic">
-<img id="i" src="dynamic" style="max-height:90%;max-width:90%;" />
-</a> <br />
+<img id="i"
+     src="dynamic"
+     class="max90"
+     onclick="swapimgclass();"
+ />
+<br />
 
 </body>
 </html>
