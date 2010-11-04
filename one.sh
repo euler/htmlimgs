@@ -21,6 +21,9 @@ cat <<END
        max-height:none;
        max-width:none;
     }
+    .center {
+       text-align: center;
+    }
   </style>
   <script>
   photos = [
@@ -98,11 +101,13 @@ function dokey(e){
 <body onload="initPage();" onkeypress="dokey(event);">
 <h2 id="h">$dir</h2>
 
+<div class="center">
 <img id="i"
      src="dynamic"
      class="max90"
      onclick="swapimgclass();"
  />
+</div>
 <br />
 
 </body>
