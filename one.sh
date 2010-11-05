@@ -1,12 +1,23 @@
 #!/bin/bash
 #
-# Emit on stdout a simple one element  to show photos in $1 or "."
-# Self contained, minimal
+# Simple, self-contained static HTML photo browser
+#
+# Emit an HTML file on stdout which references the photos in
+# the directory given in $1, or "." 
+#
+# Show one photo at a time, scaled to fit the browser window.
+# Toggle actual size display on click of the image.
+# Arrow keys and "f", "b" move through the list of images
+#
+# Goals:
+#   - This generator to depend only on common Linux/OSX utilties
+#   - HTML browser file to be self contained, without dependencies
 #
 
-  # Use given directory or "."
+# Use given directory or "." if none given
   dir=${1:-"."}
   
+# Emit first part of html file
 cat <<END
 <html>
 <head>
@@ -27,12 +38,16 @@ cat <<END
   <script>
   photos = [
 END
+
+# Emit the elements of the photo file name array
   for f in `find $dir -maxdepth 1 | egrep -i 'jpg$|jpeg$|png$|tiff$|tif$'`
   do
   cat <<END
   "$f",
 END
   done
+
+# End the file name array, and emit the rest of the html 
 cat <<END
   ];
 
@@ -90,6 +105,7 @@ function dokey(e){
     if (e.returnValue) e.returnValue = false;
     return false;
   }
+  /* Pass the event/keystroke along for higher level processing */
   return true;
 
 }
