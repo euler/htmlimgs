@@ -21,7 +21,7 @@
 cat <<END
 <html>
 <head>
-  <title>Directory $dir</title>
+  <title>Photos in $dir</title>
   <style>
     .max90 {
        max-height:90%;
@@ -54,20 +54,21 @@ cat <<END
   ];
 
 function initPage() {
- h = document.getElementById("h");
- i = document.getElementById("i");
+ fname = document.getElementById("fname");
+ img = document.getElementById("img");
  numphotos = photos.length;
  n = 0;
  showphoto(n);
 }
 
 function showphoto(n){
- h.innerHTML = photos[n];
- i.src = photos[n];
+ fname.innerHTML = photos[n];
+ xofn.innerHTML = "Photo " + (n+1) + " of " + numphotos + ".";
+ img.src = photos[n];
 }
 
 function swapimgclass(){
-  i.className = (i.className == "max90") ? "full" : "max90";
+  img.className = (img.className == "max90") ? "full" : "max90";
   return false;
 }
 
@@ -91,6 +92,7 @@ function dokey(e){
   var inbound_n = n;
 
   if (keychar ==  "f") forward();
+  if (keychar ==  " ") forward();
   if (keychar ==  "b") backward();
   /* Arrow keys */
   if (e.keyCode == 37) backward();
@@ -116,16 +118,19 @@ function dokey(e){
 </head>
 
 <body onload="initPage();" onkeypress="dokey(event);">
-<h2 id="h">$dir</h2>
 
 <div class="center">
-<img id="i"
+<img id="img"
      src="dynamic"
      class="max90"
      onclick="swapimgclass();"
  />
-</div>
 <br />
+<ul>
+ <li id="fname">File Name</li>
+ <li id="xofn">Photo x of N</li>
+</ul>
+</div>
 
 </body>
 </html>
