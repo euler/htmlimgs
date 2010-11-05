@@ -36,6 +36,8 @@ cat <<END
     }
   </style>
   <script>
+//  Array of photo file names created $(date)
+//  by script: $0 $dir
   photos = [
 END
 
