@@ -95,16 +95,13 @@ function dokey(e){
   /* Remember n, the photo number now being shown */
   var inbound_n = n;
 
-  /* Movement keys */
-  if (keychar ==  "f") forward();
-  if (keychar ==  " ") forward();
-  if (keychar ==  "j") forward();
-  if (keychar ==  "l") forward();
-  if (keychar ==  "n") forward();
-  if (keychar ==  "b") backward();
-  if (keychar ==  "k") backward();
-  if (keychar ==  "h") backward();
-  if (keychar ==  "p") backward();
+  /* Movement keys. Case-insensitive regular expresions */
+  fwdchars = /[fjln ]/i;
+  bckchars = /[bkhp]/i;
+
+  if (fwdchars.test(keychar)) forward();
+  if (bckchars.test(keychar)) backward();
+
   /* Arrow keys */
   if (e.keyCode == 37) backward();
   if (e.keyCode == 39) forward();
