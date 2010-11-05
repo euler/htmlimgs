@@ -15,7 +15,11 @@
 #
 
 # Use given directory or "." if none given
-  dir=${1:-"."}
+# Refinement $dir is really a full "find" command argument set
+# 
+# E.g., sh one.sh ~ /tmp -maxdepth 1
+  dir=$*
+  dir=${dir:-"."}
   
 # Emit first part of html file
 cat <<END
@@ -24,7 +28,7 @@ cat <<END
   <title>Photos in $dir</title>
   <style>
     .max90 {
-       max-height:90%;
+       max-height:500px;
        max-width:90%;
     }
     .full {
@@ -46,7 +50,8 @@ cat <<END
 END
 
 # Emit the elements of the photo file name array
-  for f in `find $dir -maxdepth 1 | egrep -i 'jpg$|jpeg$|png$|tiff$|tif$'`
+  find $dir | egrep -i 'jpg$|jpeg$|png$|tiff$|tif$' |
+  while read -r f
   do
   cat <<END
   "$f",
