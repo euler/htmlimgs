@@ -34,6 +34,10 @@ cat <<END
     .center {
        text-align: center;
     }
+    .label {
+       font-family: helvetica;
+       font-style: bold;
+    }
   </style>
   <script>
 //  Array of photo file names created $(date)
@@ -91,15 +95,22 @@ function dokey(e){
   /* Remember n, the photo number now being shown */
   var inbound_n = n;
 
+  /* Movement keys */
   if (keychar ==  "f") forward();
   if (keychar ==  " ") forward();
+  if (keychar ==  "j") forward();
+  if (keychar ==  "l") forward();
+  if (keychar ==  "n") forward();
   if (keychar ==  "b") backward();
+  if (keychar ==  "k") backward();
+  if (keychar ==  "h") backward();
+  if (keychar ==  "p") backward();
   /* Arrow keys */
   if (e.keyCode == 37) backward();
   if (e.keyCode == 39) forward();
 
   /*
-  ** If keystroke moved the photo, ignore it.
+  ** If keystroke moved the photo, do no more processing.
   ** Otherwise, process the event as usuual.
   */
 
@@ -125,11 +136,12 @@ function dokey(e){
      class="max90"
      onclick="swapimgclass();"
  />
-<br />
-<ul>
+<ul class="label">
  <li id="fname">File Name</li>
  <li id="xofn">Photo x of N</li>
 </ul>
+<br />
+(Forward, backward with "f","b", space, arrow or editor keys)
 </div>
 
 </body>
