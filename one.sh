@@ -27,13 +27,20 @@ cat <<END
 <head>
   <title>Photos in $dir</title>
   <style>
+    html, body, div {
+       height: 100%;
+    }
     .max90 {
-       max-height:500px;
+       max-height:90%;
        max-width:90%;
     }
     .full {
-       max-height:none;
-       max-width:none;
+       max-height: none;
+       max-width: none;
+    }
+    .boxedimg {
+       max-height: inherit;
+       max-width: inherit;
     }
     .center {
        text-align: center;
@@ -65,6 +72,7 @@ cat <<END
 function initPage() {
  fname = document.getElementById("fname");
  img = document.getElementById("img");
+ imgbox = document.getElementById("imgbox");
  numphotos = photos.length;
  n = 0;
  showphoto(n);
@@ -76,8 +84,8 @@ function showphoto(n){
  img.src = photos[n];
 }
 
-function swapimgclass(){
-  img.className = (img.className == "max90") ? "full" : "max90";
+function swapimgboxclass(){
+  imgbox.className = (imgbox.className == "max90") ? "full" : "max90";
   return false;
 }
 
@@ -133,16 +141,15 @@ function dokey(e){
 <body onload="initPage();" onkeypress="dokey(event);">
 
 <div class="center">
-<img id="img"
+  <div id="imgbox" class="max90">
+  <img id="img" class="boxedimg"
      src="dynamic"
-     class="max90"
-     onclick="swapimgclass();"
- />
+     onclick="swapimgboxclass();"/>
+  </div>
 <ul class="label">
  <li id="fname">File Name</li>
  <li id="xofn">Photo x of N</li>
 </ul>
-<br />
 (Forward, backward with "f","b", space, arrow or editor keys)
 </div>
 
