@@ -57,7 +57,7 @@ cat <<END
 END
 
 # Emit the elements of the photo file name array
-  find $dir | egrep -i 'jpg$|jpeg$|png$|tiff$|tif$' |
+  find $dir | egrep -i 'jpg$|jpeg$|png$|tiff$|tif$' | sort |
   while read -r f
   do
   cat <<END
