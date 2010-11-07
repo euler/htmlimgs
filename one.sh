@@ -145,12 +145,12 @@ function dokey(e){
   <img id="img" class="boxedimg"
      src="dynamic"
      onclick="swapimgboxclass();"/>
-  </div>
 <ul class="label">
  <li id="fname">File Name</li>
  <li id="xofn">Photo x of N</li>
 </ul>
 (Forward, backward with "f","b", space, arrow or editor keys)
+</div>
 </div>
 
 </body>
