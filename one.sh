@@ -18,7 +18,7 @@
 # Refinement $dir is really a full "find" command argument set
 # 
 # E.g., sh one.sh ~ /tmp -maxdepth 1
-  dir=$*
+  dir="$*"
   dir=${dir:-"."}
   
 # Emit first part of html file
@@ -57,7 +57,7 @@ cat <<END
 END
 
 # Emit the elements of the photo file name array
-  find $dir | egrep -i 'jpg$|jpeg$|png$|tiff$|tif$' | sort |
+  find "$dir" | egrep -i 'jpg$|jpeg$|png$|tiff$|tif$' | sort |
   while read -r f
   do
   cat <<END
