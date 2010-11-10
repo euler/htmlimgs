@@ -15,11 +15,21 @@
 #
 
 # Use given directory or "." if none given
-# Refinement $dir is really a full "find" command argument set
+# In truth, $dir is really a full "find" command argument set
 # 
 # E.g., sh one.sh ~ /tmp -maxdepth 1
+
+usage="
+Usage: $0 [directory]
+"
   dir="$*"
   dir=${dir:-"."}
+
+  if [[ "$dir" =~ ^(-[?hH]|-help|--help)$ ]]
+  then 
+  echo 1>&2 $usage
+  exit 1
+  fi
   
 # Emit first part of html file
 cat <<END
@@ -149,10 +159,37 @@ function dokey(e){
  <li id="fname">File Name</li>
  <li id="xofn">Photo x of N</li>
 </ul>
-(Forward, backward with "f","b", space, arrow or editor keys)
+(Forward, backward with "f","b", space, arrow or editor keys, click toggles size)
 </div>
 </div>
 
 </body>
 </html>
 END
+
+exit 0
+
+/* 
+
+Copyright (c) 2010, Raymond L. Niemeir
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of 
+this software and associated documentation files (the "Software"), to deal in 
+the Software without restriction, including without limitation the rights to 
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do 
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all 
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+SOFTWARE.
+
+*/
+
