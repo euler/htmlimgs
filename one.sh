@@ -132,7 +132,7 @@ function backward() {
 }
 
 function goton() {
-  var nstr = prompt("Photo 1 to " + numphotos + "? ", (n+1) + "");
+  var nstr = prompt("Go to photo 1 to " + numphotos + "? ", (n+1) + "");
   n = parseInt(nstr) - 1;
   if (isNaN(n)) n = 0;
   showphoto(n);
