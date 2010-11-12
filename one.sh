@@ -20,7 +20,9 @@
 # E.g., sh one.sh ~ /tmp -maxdepth 1
 
 usage="
-Usage: $0 [directory]
+Usage:
+   $0 [directory]
+   $0 [find command args]
 "
   dir="$*"
   dir=${dir:-"."}
@@ -80,17 +82,35 @@ cat <<END
   ];
 
 function initPage() {
+ /* Init global variables */
  fname = document.getElementById("fname");
  img = document.getElementById("img");
  imgbox = document.getElementById("imgbox");
  numphotos = photos.length;
  n = 0;
+ actions = 0;
+
+ /* Movement keys. Case-insensitive regular expresions */
+ fwdchars = /[fjln ]/i;
+ bckchars = /[bkhp]/i;
+ gotonchars = /[g]/i;
+
  showphoto(n);
 }
 
-function showphoto(n){
+function showphoto(num){
+ n = num;
+ /* Clip n to array bounds */
+ if ( n >= numphotos ) n = numphotos-1;
+ if ( n < 0  ) n = 0;
+
+ /* Show file name and photo number */
  fname.innerHTML = photos[n];
  xofn.innerHTML = "Photo " + (n+1) + " of " + numphotos + ".";
+
+ /* Increment global actions counter for higher level keystroke filter */
+ actions++;
+ /* Start loading */
  img.src = photos[n];
 }
 
@@ -111,31 +131,35 @@ function backward() {
  showphoto(n);
 }
 
+function goton() {
+  var nstr = prompt("Photo 1 to " + numphotos + "? ", (n+1) + "");
+  n = parseInt(nstr) - 1;
+  if (isNaN(n)) n = 0;
+  showphoto(n);
+}
+
 function dokey(e){
   /* Non-IE handling only */
   var keychar = String.fromCharCode(e.which);
 
-  /* Remember n, the photo number now being shown */
-  var inbound_n = n;
-
-  /* Movement keys. Case-insensitive regular expresions */
-  fwdchars = /[fjln ]/i;
-  bckchars = /[bkhp]/i;
+  /* Remember actions, the global count of display actions */
+  var inbound_actions = actions;
 
   if (fwdchars.test(keychar)) forward();
   if (bckchars.test(keychar)) backward();
+  if (gotonchars.test(keychar)) goton(); 
 
   /* Arrow keys */
   if (e.keyCode == 37) backward();
   if (e.keyCode == 39) forward();
 
   /*
-  ** If keystroke moved the photo, do no more processing.
+  ** If keystroke caused action, do no more processing.
   ** Otherwise, process the event as usuual.
   */
 
-  if (n != inbound_n) {
-    /* Photo moved by this keystroke, no more processing */
+  if (actions != inbound_actions) {
+    /* Keystroke caused action, no more processing */
     if (e.preventDefault) e.preventDefault( );
     if (e.returnValue) e.returnValue = false;
     return false;
