@@ -90,10 +90,11 @@ function initPage() {
  n = 0;
  actions = 0;
 
- /* Movement keys. Case-insensitive regular expresions */
+ /* Action keys. Case-insensitive regular expresions */
  fwdchars = /[fjln ]/i;
  bckchars = /[bkhp]/i;
  gotonchars = /[g]/i;
+ sizechars = /[+-_=]/;
 
  showphoto(n);
 }
@@ -116,6 +117,7 @@ function showphoto(num){
 
 function swapimgboxclass(){
   imgbox.className = (imgbox.className == "max90") ? "full" : "max90";
+  actions++;
   return false;
 }
 
@@ -148,6 +150,7 @@ function dokey(e){
   if (fwdchars.test(keychar)) forward();
   if (bckchars.test(keychar)) backward();
   if (gotonchars.test(keychar)) goton(); 
+  if (sizechars.test(keychar)) swapimgboxclass(); 
 
   /* Arrow keys */
   if (e.keyCode == 37) backward();
@@ -183,7 +186,7 @@ function dokey(e){
  <li id="fname">File Name</li>
  <li id="xofn">Photo x of N</li>
 </ul>
-(Forward, backward with "f","b", space, arrow or editor keys, click toggles size)
+(Forward, back with "f","b", space, arrow, editor keys; click|+- toggle size,"g" goto)
 </div>
 </div>
 
