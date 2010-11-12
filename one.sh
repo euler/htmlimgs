@@ -19,18 +19,20 @@
 # 
 # E.g., sh one.sh ~ /tmp -maxdepth 1
 
-usage="
+usage() { 
+cat 1>&2 <<ENDUSAGE
 Usage:
    $0 [directory]
    $0 [find command args]
-"
+ENDUSAGE
+}
   dir="$*"
   dir=${dir:-"."}
 
   if [[ "$dir" =~ ^(-[?hH]|-help|--help)$ ]]
   then 
-  echo 1>&2 $usage
-  exit 1
+    usage
+    exit 1
   fi
   
 # Emit first part of html file
