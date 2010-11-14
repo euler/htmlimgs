@@ -28,7 +28,7 @@ Usage:
 ENDUSAGE
 }
 
-# "dir" can be generalized find command args
+# "dir" may also be a generalized find command argument set
   dir="$*"
   dir=${dir:-"."}
 
@@ -46,27 +46,32 @@ cat <<END
   <title>Photos in $dir</title>
   <style>
     html, body {
-       margin: 4 2;
+       margin: 0;
        padding: 0;
        height: 100%;
     }
     div {
        height: 95%;
+       margin: 0;
+       padding: 0;
     }
     body {
        background: black;
        color: #cccccc;
+       margin: 0;
+       padding: 0;
     }
     .max90 {
        max-height:95%;
-       max-width:95%;
+       max-width: 100%;
        margin: 0;
+       padding: 0;
        text-align: center;
     }
     .full {
        max-height: none;
        max-width: none;
-       margin: 0px auto;
+       margin: 0;
        text-align: center;
     }
     .boxedimg {
@@ -77,7 +82,8 @@ cat <<END
     }
     .center {
        text-align: center;
-       margin: 0px auto;
+       margin: 0;
+       padding: 0;
     }
     .label {
        font-family: helvetica;
