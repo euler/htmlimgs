@@ -23,12 +23,16 @@ usage() {
 cat 1>&2 <<ENDUSAGE
 Usage:
    $0 [directory]
+   -or- 
    $0 [find command args]
 ENDUSAGE
 }
+
+# "dir" can be generalized find command args
   dir="$*"
   dir=${dir:-"."}
 
+# Maybe emit usage statment for help request
   if [[ "$dir" =~ ^(-[?hH]|-help|--help)$ ]]
   then 
     usage
@@ -42,6 +46,8 @@ cat <<END
   <title>Photos in $dir</title>
   <style>
     html, body {
+       margin: 4 2;
+       padding: 0;
        height: 100%;
     }
     div {
@@ -52,9 +58,9 @@ cat <<END
        color: #cccccc;
     }
     .max90 {
-       max-height:85%;
-       max-width:90%;
-       margin: 10px auto 0px;
+       max-height:95%;
+       max-width:95%;
+       margin: 0;
        text-align: center;
     }
     .full {
@@ -66,7 +72,8 @@ cat <<END
     .boxedimg {
        max-height: inherit;
        max-width: inherit;
-       margin: 0px auto;
+       margin: 0;
+       padding: 0;
     }
     .center {
        text-align: center;
