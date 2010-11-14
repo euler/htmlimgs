@@ -41,27 +41,41 @@ cat <<END
 <head>
   <title>Photos in $dir</title>
   <style>
-    html, body, div {
+    html, body {
        height: 100%;
     }
+    div {
+       height: 95%;
+    }
+    body {
+       background: black;
+       color: #cccccc;
+    }
     .max90 {
-       max-height:90%;
+       max-height:85%;
        max-width:90%;
+       margin: 10px auto 0px;
+       text-align: center;
     }
     .full {
        max-height: none;
        max-width: none;
+       margin: 0px auto;
+       text-align: center;
     }
     .boxedimg {
        max-height: inherit;
        max-width: inherit;
+       margin: 0px auto;
     }
     .center {
        text-align: center;
+       margin: 0px auto;
     }
     .label {
        font-family: helvetica;
        font-style: bold;
+       text-align: center;
     }
   </style>
   <script>
