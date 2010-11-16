@@ -2,7 +2,7 @@
 #
 # htmlimgs.sh
 #
-# Emit an HTML file on stdout which browses the photos in
+# Emit an HTML file on stdout which can browse the photos in
 # the directory given in $1, or "." if none.
 #
 # Show one photo at a time, scaled to fit the browser window.
@@ -28,8 +28,9 @@ Usage:
    $0 [find command args] >showphotos.html
 Examples:
    $0 >index.html
-   $0 ~/Desktop/panos >one.html
+   $0 ~/Desktop/panos >/tmp/one.html
 
+See bottom of source file $0 for credits and license.
 ENDUSAGE
 }
 
@@ -231,6 +232,9 @@ END
 exit 0
 
 /* 
+
+Concept and design by Matt Niemeir.
+Code by Ray Niemeir.
 
 Copyright (c) 2010, Raymond L. Niemeir
 
