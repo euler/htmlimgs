@@ -128,7 +128,7 @@ function initPage() {
  fwdchars = /[fjln ]/i;
  bckchars = /[bkhp]/i;
  gotonchars = /[g]/i;
- sizechars = /[+-_=]/;
+ sizechars = /[-+_=]/;
 
  showphoto(n);
 }
