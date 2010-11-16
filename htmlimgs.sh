@@ -1,13 +1,12 @@
 #!/bin/bash
 #
-# Simple, self-contained static HTML photo browser
+# htmlimgs.sh
 #
-# Emit an HTML file on stdout which references the photos in
-# the directory given in $1, or "." 
+# Emit an HTML file on stdout which browses the photos in
+# the directory given in $1, or "." if none.
 #
 # Show one photo at a time, scaled to fit the browser window.
-# Toggle actual size display on click of the image.
-# Arrow keys and "f", "b" move through the list of images
+# See usage() below for interactive controls.
 #
 # Goals:
 #   - This generator to depend only on common Linux/OSX utilties
@@ -19,12 +18,18 @@
 # 
 # E.g., sh one.sh ~ /tmp -maxdepth 1
 
-usage() { 
+function usage() { 
 cat 1>&2 <<ENDUSAGE
+$0: $1
+Generate an html file to browse a set of photos
 Usage:
-   $0 [directory]
+   $0 [directory] >showphotos.html
    -or- 
-   $0 [find command args]
+   $0 [find command args] >showphotos.html
+Examples:
+   $0 >index.html
+   $0 ~/Desktop/panos >one.html
+
 ENDUSAGE
 }
 
