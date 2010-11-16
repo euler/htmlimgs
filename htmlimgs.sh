@@ -2,7 +2,7 @@
 #
 # htmlimgs.sh
 #
-# Emit an HTML file on stdout which can browse the photos in
+# Emit an HTML file on stdout which can browse the images in
 # the directory given in $1, or "." if none.
 #
 # Show one photo at a time, scaled to fit the browser window.
@@ -18,17 +18,20 @@
 # 
 # E.g., sh one.sh ~ /tmp -maxdepth 1
 
+VERSION="v0.6"
+
 function usage() { 
 cat 1>&2 <<ENDUSAGE
-$0: $1
-Generate an html file to browse a set of photos
+$0 $VERSION: $1
+
+Generate an html file to browse a set of images
 Usage:
    $0 [directory] >showphotos.html
    -or- 
    $0 [find command args] >showphotos.html
 Examples:
    $0 >index.html
-   $0 ~/Desktop/panos >/tmp/one.html
+   $0 ~/Desktop/panos >/tmp/wide.html
 
 See bottom of source file $0 for credits and license.
 ENDUSAGE
@@ -39,7 +42,7 @@ ENDUSAGE
   dir=${dir:-"."}
 
 # Maybe emit usage statment for help request
-  if [[ "$dir" =~ ^(-[?hH]|-help|--help)$ ]]
+  if [[ "$dir" =~ ^(-[?hHv]|-help|--help|-version|--version)$ ]]
   then 
     usage
     exit 1
