@@ -3,7 +3,10 @@
 # htmlimgs.sh
 #
 # Emit an HTML file on stdout which can browse the images in
-# the directory given in $1, or "." if none.
+# the directory given in $1
+#
+# Optionally, the agruments can be full "find" command arguments.
+# See "man find".
 #
 # Show one photo at a time, scaled to fit the browser window.
 # See usage() below for interactive controls.
@@ -18,7 +21,7 @@
 # 
 # E.g., sh one.sh ~ /tmp -maxdepth 1
 
-VERSION="v0.6"
+VERSION="v0.61"
 
 function usage() { 
 cat 1>&2 <<ENDUSAGE
@@ -26,12 +29,13 @@ $0 $VERSION: $1
 
 Generate an html file to browse a set of images
 Usage:
-   $0 [directory] >showphotos.html
+   $0 directory >showphotos.html
    -or- 
    $0 [find command args] >showphotos.html
 Examples:
-   $0 >index.html
+   $0 . >index.html
    $0 ~/Desktop/panos >/tmp/wide.html
+   $0 ~/Desktop/panos . --newer ~/Desktop/previous >/tmp/wide.html
 
 See bottom of source file $0 for credits and license.
 ENDUSAGE
@@ -39,10 +43,9 @@ ENDUSAGE
 
 # "dir" may also be a generalized find command argument set
   dir="$*"
-  dir=${dir:-"."}
 
 # Maybe emit usage statment for help request
-  if [[ "$dir" =~ ^(-[?hHv]|-help|--help|-version|--version)$ ]]
+  if [[ "$dir" =~ (^$)|^(-[?hHv]|-help|--help|-version|--version)$ ]]
   then 
     usage
     exit 1
