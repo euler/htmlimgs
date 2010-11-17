@@ -21,13 +21,13 @@
 # 
 # E.g., sh one.sh ~ /tmp -maxdepth 1
 
-VERSION="v0.61"
+VERSION="v0.63"
 
 function usage() { 
 cat 1>&2 <<ENDUSAGE
+
 $0 $VERSION: $1
 
-Generate an html file to browse a set of images
 Usage:
    $0 directory >showphotos.html
    -or- 
@@ -36,6 +36,10 @@ Examples:
    $0 . >index.html
    $0 ~/Desktop/panos >/tmp/wide.html
    $0 ~/Desktop/panos . --newer ~/Desktop/previous >/tmp/wide.html
+   sh $0 ~/Desktop/panos -maxdepth 2 >panos.html
+   sh $0 ~/Pictures >all.html ; open all.html  # OS X
+
+Generates an html file to browse a set of images
 
 See bottom of source file $0 for credits and license.
 ENDUSAGE
@@ -44,11 +48,18 @@ ENDUSAGE
 # "dir" may also be a generalized find command argument set
   dir="$*"
 
-# Maybe emit usage statment for help request
-  if [[ "$dir" =~ (^$)|^(-[?hHv]|-help|--help|-version|--version)$ ]]
+# Maybe emit usage statment for lack of args
+  if [[ "$dir" =~ (^$) ]]
   then 
-    usage
+    usage "Missing image directory name"
     exit 1
+  fi
+
+# Maybe emit usage statment for help/version requests
+  if [[ "$dir" =~ ^(-[?hHv]|-help|--help|-version|--version)$ ]]
+  then 
+    usage 
+    exit 2
   fi
   
 # Emit first part of html file
@@ -116,7 +127,22 @@ END
   cat <<END
   "$f",
 END
-  done
+ done
+ # Save the exit codes of each step of previous pipeline
+ # (Otherwise, the PIPESTATUS array is reset too soon.)
+ savestatus=(${PIPESTATUS[@]})
+ if [[ ${savestatus[0]} != 0 ]]
+ then
+   # find command failed
+   usage "Invalid find command args. See \"man find\""
+   exit 3
+ fi
+ if [[ ${savestatus[1]} != 0 ]]
+ then
+   # egrep turned up nothing
+   usage "No image files found"
+   exit 4
+ fi
 
 # End the file name array, and emit the rest of the html 
 cat <<END
