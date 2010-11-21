@@ -163,6 +163,10 @@ function initPage() {
  gotonchars = /[g]/i;
  sizechars = /[-+_=]/;
 
+ /* Maybe jump to #n hash */
+ if(parent.location.hash){
+   n = parseInt(parent.location.hash.substring(1))-1;
+ }
  showphoto(n);
 }
 
@@ -175,6 +179,9 @@ function showphoto(num){
  /* Show file name and photo number */
  fname.innerHTML = photos[n];
  xofn.innerHTML = "Photo " + (n+1) + " of " + numphotos + ".";
+
+ /* Update browser's URL display to current photo */
+ parent.location.hash = ""+(n+1)+"";
 
  /* Increment global actions counter for higher level keystroke filter */
  actions++;
