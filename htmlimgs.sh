@@ -18,19 +18,19 @@
 
 # Use given directory or "." if none given
 # In truth, $dir is really a full "find" command argument set
-# 
+#
 # E.g., sh one.sh ~ /tmp -maxdepth 1
 
 VERSION="v0.63"
 
-function usage() { 
+function usage() {
 cat 1>&2 <<ENDUSAGE
 
 $0 $VERSION: $1
 
 Usage:
    $0 directory >showphotos.html
-   -or- 
+   -or-
    $0 [find command args] >showphotos.html
 Examples:
    $0 . >index.html
@@ -50,18 +50,18 @@ ENDUSAGE
 
 # Maybe emit usage statment for lack of args
   if [[ "$dir" =~ (^$) ]]
-  then 
+  then
     usage "Missing image directory name"
     exit 1
   fi
 
 # Maybe emit usage statment for help/version requests
   if [[ "$dir" =~ ^(-[?hHv]|-help|--help|-version|--version)$ ]]
-  then 
-    usage 
+  then
+    usage
     exit 2
   fi
-  
+
 # Emit first part of html file
 cat <<END
 <html>
@@ -144,7 +144,7 @@ END
    exit 4
  fi
 
-# End the file name array, and emit the rest of the html 
+# End the file name array, and emit the rest of the html
 cat <<END
   ];
 
@@ -223,8 +223,8 @@ function dokey(e){
 
   if (fwdchars.test(keychar)) forward();
   if (bckchars.test(keychar)) backward();
-  if (gotonchars.test(keychar)) goton(); 
-  if (sizechars.test(keychar)) swapimgboxclass(); 
+  if (gotonchars.test(keychar)) goton();
+  if (sizechars.test(keychar)) swapimgboxclass();
 
   /* Arrow keys */
   if (e.keyCode == 37) backward();
@@ -270,29 +270,29 @@ END
 
 exit 0
 
-/* 
+/*
 
 Concept and design by Matt Niemeir.
 Code by Ray Niemeir.
 
 Copyright (c) 2010, Raymond L. Niemeir
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of 
-this software and associated documentation files (the "Software"), to deal in 
-the Software without restriction, including without limitation the rights to 
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
 use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do 
+of the Software, and to permit persons to whom the Software is furnished to do
 so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all 
+The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
